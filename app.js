@@ -13,7 +13,7 @@ db.once('open', function(){
 mongoose.connect(process.env.NOMAD_DB_BLOG_DEV);
 
 var User = require('./models/user');
-// var Post = require('./models/post');
+var Post = require('./models/post');
 
 // [CONFIGURE APP TO USE bodyParser]
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,7 +23,9 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 
 // [CONFIGURE ROUTER]
-var router = require('./routes')(app);
+var index = require('./routes')(app);
+var users = require('./routes/users')(app,User);
+var posts = require('./routes/posts')(app,Post);
 
 // [RUN SERVER]
 var server = app.listen(port, function(){

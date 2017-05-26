@@ -6,4 +6,6 @@ module.exports = function(app){
       res.sendFile(path.join(__dirname + '/../static/html/index.html'));
     });
 
+    //Client Page는 여기서 작업
+
 }
