@@ -2,6 +2,7 @@ var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
+var path = require('path');
 
 var db = mongoose.connection;
 db.on('error', console.error);
@@ -26,6 +27,9 @@ var port = process.env.PORT || 8080;
 var index = require('./routes')(app);
 var users = require('./routes/users')(app,User);
 var posts = require('./routes/posts')(app,Post);
+
+// [CONFIGURE STATIC]
+app.use(express.static(path.join(__dirname, 'public')));
 
 // [RUN SERVER]
 var server = app.listen(port, function(){
