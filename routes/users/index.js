@@ -63,7 +63,7 @@ module.exports = function(app,User){
     //oAuth token을 리턴해줄것.
     app.post('/api/users/login', function(req,res){
       sess = req.session;
-      User.findById(req.params.email, function(err, user){
+      User.find({'email':req.params.email}, function(err, user){
         if(err) return res.status(500).json({error: 'database failure'});
         if(!user) return res.status(404).json({error: 'user not found'});
           if(req.body.password === user.password) {
